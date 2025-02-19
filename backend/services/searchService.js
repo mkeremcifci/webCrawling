@@ -1,5 +1,5 @@
 export default class SearchService{
     static async search(req){
-        console.log("Request")
+        console.log(req.body)
     }
 }

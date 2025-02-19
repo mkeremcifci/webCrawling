@@ -4,12 +4,12 @@ import searchService from "./../services/searchService.js"
 
 const router = express.Router();
 
-router.get("/", async(req, res)=>{
+router.post("/", async(req, res)=>{
     try{
         searchService.search(req)
-        res.sendStatus(200)
+        res.status(200).json({message:"Geldi"})
     }catch{
-        res.sendStatus(500)
+        res.status(500).json({message:"Gelmedi"})
     }
     
 })
