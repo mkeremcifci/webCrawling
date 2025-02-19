@@ -1,5 +1,8 @@
+import crawl from "./webCrawl.js"
+
 export default class SearchService{
     static async search(req){
-        console.log(req.body)
+        const {job} = req.body
+        crawl(job)
     }
 }
