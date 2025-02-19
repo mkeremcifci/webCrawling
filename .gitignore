@@ -1,0 +1,15 @@
+.vscode/
+.idea/
+*.swp
+*.swo
+
+frontend/node_modules/
+frontend/.env
+frontend/.next/
+frontend/.cache/
+frontend/build/
+frontend/public/static/
+frontend/.DS_Store
+
+backend/node_modules/
+backend/.env
