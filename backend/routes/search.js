@@ -6,7 +6,7 @@ const router = express.Router();
 
 router.post("/", async(req, res)=>{
     try{
-        searchService.search(req)
+        if(await searchService.search(req))
         res.status(200).json({message:"Geldi"})
     }catch{
         res.status(500).json({message:"Gelmedi"})

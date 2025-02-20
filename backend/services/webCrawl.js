@@ -1,34 +1,32 @@
 import puppeteer from 'puppeteer-extra';
 import StealthPlugin from 'puppeteer-extra-plugin-stealth';
 import "dotenv/config"
-import { Console } from 'node:console';
+import { Console, error } from 'node:console';
 
 import sleep from '../helpers/Sleep.js';
 import HandleBotDetection from './../helpers/handleBotDetection.js'
-
-
+import Errors from './../helpers/error.js'
+const {BotDetectionError, InternalServerError} = Errors
 
 const crawl = async (job)=>{
-    const browser = await puppeteer.launch({
+    try{const browser = await puppeteer.launch({
         headless: false,
         args: [
             '--no-sandbox',
             '--disable-setuid-sandbox',
         ]
-    });
+        });
 
-    const page = await browser.newPage();
+        const page = await browser.newPage();
 
 
-    await page.setViewport({
-        width: 1920,
-        height: 1080
-    });
+        await page.setViewport({
+            width: 1920,
+            height: 1080
+        });
 
-    
-
-    await page.goto(process.env.URL, { waitUntil: 'networkidle2' });
-    if(!(await HandleBotDetection(page))){
+        await page.goto(process.env.URL, { waitUntil: 'networkidle2' });
+        if(!(await HandleBotDetection(page))){
         await sleep(5000)
 
         const searchInput = 'input[data-test="search-input-wrapper"]';
@@ -48,10 +46,17 @@ const crawl = async (job)=>{
         await sleep(10000000)
 
         await browser.close()
-    }else{
-        console.log("Bota düştü")
+        return true
+
+        }else{
+            browser.close()
+            const error = new BotDetectionError()
+            return error
+        }
+    }catch{
+        const error = new InternalServerError()
+        return error
     }
-    
 }
 
 export default crawl
