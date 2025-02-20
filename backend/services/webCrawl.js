@@ -6,11 +6,11 @@ import { Console, error } from 'node:console';
 import sleep from '../helpers/Sleep.js';
 import HandleBotDetection from './../helpers/handleBotDetection.js'
 import Errors from './../helpers/error.js'
-
-
+import getJobDetails from './../helpers/getJobDetails.js'
 
 const {BotDetectionError, InternalServerError} = Errors
 
+puppeteer.use(StealthPlugin());
 const crawl = async (job)=>{
     try{const browser = await puppeteer.launch({
         headless: false,
@@ -44,13 +44,7 @@ const crawl = async (job)=>{
         await page.waitForNavigation({ waitUntil: 'networkidle2' });
 
 
-        const jobs = await page.evaluate(() => {
-            return Array.from(document.querySelectorAll('.list-items-wrapper .list-items')).map(item => ({
-                title: item.querySelector('.k-ad-card-title.multiline')?.innerText.trim() || null,
-                subtitle: item.querySelector('.subtitle')?.innerText.trim() || null,
-                detail: item.querySelector('.job-detail')?.innerText.trim() || null
-            }));
-        });
+        const jobs = await getJobDetails(page)
     
         console.log(jobs);
         await sleep(10000000)
