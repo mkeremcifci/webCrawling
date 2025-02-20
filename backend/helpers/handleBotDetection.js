@@ -1,9 +1,11 @@
 const HandleBotDetection = async (page) =>{
-    const search = 'div[data-test="search-input-wrapper"]';
-    if(await page.waitForSelector(search, { timeout: 60000 })){
-        return true;
-    };
-    return false
+    const search = 'div[class="px-captcha-container"]';
+    try{
+        await page.waitForSelector(search, {timeout:6000})
+        return true
+    }catch(error){
+        return false
+    }
 }
 
 export default HandleBotDetection

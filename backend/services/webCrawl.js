@@ -28,8 +28,7 @@ const crawl = async (job)=>{
     
 
     await page.goto(process.env.URL, { waitUntil: 'networkidle2' });
-
-    if(!HandleBotDetection(page)){
+    if(!(await HandleBotDetection(page))){
         await sleep(5000)
 
         const searchInput = 'input[data-test="search-input-wrapper"]';
@@ -42,8 +41,11 @@ const crawl = async (job)=>{
         await page.click(searchBtn);
 
         await page.waitForNavigation({ waitUntil: 'networkidle2' });
-
-        await sleep(100000000)
+        const items = await page.$$eval('.list-items-wrapper > *', elements => {
+            return elements.map(el => el.innerText.trim()); 
+        });
+        console.log(items)
+        await sleep(10000000)
 
         await browser.close()
     }else{
