@@ -6,6 +6,9 @@ import { Console, error } from 'node:console';
 import sleep from '../helpers/Sleep.js';
 import HandleBotDetection from './../helpers/handleBotDetection.js'
 import Errors from './../helpers/error.js'
+import getJobDetails from './getJobDetails.js';
+
+
 const {BotDetectionError, InternalServerError} = Errors
 
 const crawl = async (job)=>{
@@ -39,10 +42,17 @@ const crawl = async (job)=>{
         await page.click(searchBtn);
 
         await page.waitForNavigation({ waitUntil: 'networkidle2' });
-        const items = await page.$$eval('.list-items-wrapper > *', elements => {
-            return elements.map(el => el.innerText.trim()); 
+
+        
+        const jobs = await page.evaluate(() => {
+            return Array.from(document.querySelectorAll('.list-items-wrapper .list-items')).map(item => ({
+                title: item.querySelector('.k-ad-card-title.multiline')?.innerText.trim() || null,
+                subtitle: item.querySelector('.subtitle')?.innerText.trim() || null,
+                detail: item.querySelector('.job-detail')?.innerText.trim() || null
+            }));
         });
-        console.log(items)
+    
+        console.log(jobs);
         await sleep(10000000)
 
         await browser.close()
@@ -53,9 +63,8 @@ const crawl = async (job)=>{
             const error = new BotDetectionError()
             return error
         }
-    }catch{
-        const error = new InternalServerError()
-        return error
+    }catch(error){
+        console.error(error)
     }
 }
 
