@@ -4,6 +4,7 @@ import "dotenv/config"
 import { Console } from 'node:console';
 
 import sleep from '../helpers/Sleep.js';
+import HandleBotDetection from './../helpers/handleBotDetection.js'
 
 
 
@@ -24,24 +25,31 @@ const crawl = async (job)=>{
         height: 1080
     });
 
+    
 
     await page.goto(process.env.URL, { waitUntil: 'networkidle2' });
-    await sleep(5000)
 
-    const searchInput = 'input[data-test="search-input-wrapper"]';
-    const searchBtn = 'button[data-test="search-job-button"]';
+    if(!HandleBotDetection(page)){
+        await sleep(5000)
 
-    await page.waitForSelector(searchInput, { timeout: 60000 });
-    await page.type(searchInput, job);
+        const searchInput = 'input[data-test="search-input-wrapper"]';
+        const searchBtn = 'button[data-test="search-job-button"]';
 
-    await page.waitForSelector(searchBtn);
-    await page.click(searchBtn);
+        await page.waitForSelector(searchInput, { timeout: 60000 });
+        await page.type(searchInput, job);
 
-    await page.waitForNavigation({ waitUntil: 'networkidle2' });
+        await page.waitForSelector(searchBtn);
+        await page.click(searchBtn);
 
-    await sleep(10000)
+        await page.waitForNavigation({ waitUntil: 'networkidle2' });
 
-    await browser.close()
+        await sleep(100000000)
+
+        await browser.close()
+    }else{
+        console.log("Bota düştü")
+    }
+    
 }
 
 export default crawl
