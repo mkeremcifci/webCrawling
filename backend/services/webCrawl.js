@@ -1,7 +1,6 @@
 import puppeteer from 'puppeteer-extra';
 import StealthPlugin from 'puppeteer-extra-plugin-stealth';
 import "dotenv/config"
-import { Console, error } from 'node:console';
 
 import sleep from '../helpers/Sleep.js';
 import HandleBotDetection from './../helpers/handleBotDetection.js'

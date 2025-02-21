@@ -1,4 +1,3 @@
-import { type } from "node:os"
 import crawl from "./webCrawl.js"
 import Errors from "./../helpers/error.js"
 import sleep from "../helpers/Sleep.js"
