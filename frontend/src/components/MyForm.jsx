@@ -1,8 +1,26 @@
 import { Button } from "antd";
 import {Input} from "antd";
 import { useState } from "react";
+import axios from "axios"
 
-import {handleInputChange, handleCLick} from "../helpers/handleInput";
+
+
+function handleInputChange(e, setJobValue){
+    setJobValue(e.target.value)
+}
+
+async function handleCLick(job){
+    console.log(job)
+    try{
+        const response = await axios.post("http://localhost:5000/search",{
+            job: job
+        })
+        console.log("Server response:", response.data)
+        
+    }catch(error){
+        console.error("Error sending data:", error)
+    }
+}
 
 const MyForm = () => {
     const [jobValue, setJobValue] = useState('')
