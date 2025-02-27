@@ -13,7 +13,7 @@ async function handleCLick(job){
     console.log(job)
     try{
         const response = await axios.post("http://localhost:5000/search",{
-            job: job
+            keyword: job
         })
         console.log("Server response:", response.data)
         
