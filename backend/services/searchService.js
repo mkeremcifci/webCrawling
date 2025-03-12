@@ -11,7 +11,6 @@ export default class SearchService{
         while(i++<threshold && result === null){
             const result = await Crawl.kariyernetCrawl(keyword)
             return result
-
         }
     }
 }

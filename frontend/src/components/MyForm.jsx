@@ -1,36 +1,33 @@
-import { Button } from "antd";
-import {Input} from "antd";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { Button, Input } from "antd";
 import axios from "axios"
 
 
 
-function handleInputChange(e, setJobValue){
-    setJobValue(e.target.value)
-}
-
-async function handleCLick(job){
-    console.log(job)
-    try{
-        const response = await axios.post("http://localhost:5000/search",{
-            keyword: job
-        })
-        console.log("Server response:", response.data)
-        
-    }catch(error){
-        console.error("Error sending data:", error)
-    }
-}
-
 const MyForm = () => {
     const [jobValue, setJobValue] = useState('')
+    const navigate = useNavigate()
+
+    async function handleCLick(job){
+        console.log(job)
+        try{
+            const response = await axios.post("http://localhost:5000/search",{
+                keyword: job
+            })
+            navigate("/search-results",{state:{userInput:jobValue,results:response.data.message}})
+        }
+        catch(error){
+            console.error("Error sending data:", error)
+        }
+    }
 
     return(
         <div>
             <Input 
                 placeholder="İş"
                 value={jobValue}
-                onChange={(e)=>handleInputChange(e, setJobValue)}
+                onChange={(e)=>setJobValue(e.target.value)}
             ></Input>
             <Button onClick={()=> handleCLick(jobValue)}>Ara</Button>
         </div>
