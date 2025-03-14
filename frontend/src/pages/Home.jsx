@@ -5,7 +5,6 @@ function Home(){
         <div>
             <MyForm />
         </div>
-      
     )
 }
 export default Home

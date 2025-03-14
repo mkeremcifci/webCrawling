@@ -7,7 +7,9 @@ import './App.css'
 import 'antd/dist/reset.css'
 import Home from './pages/Home'
 import SearchResults from './pages/SearchResults'
-import Develop from './pages/Develop';
+import MainLayout from './pages/Layout';
+import About from './pages/About';
+
 
 
 
@@ -15,9 +17,11 @@ createRoot(document.getElementById('root')).render(
   <StrictMode>
     <BrowserRouter>
       <Routes>
-        <Route path='/' element={<Home />} />
-        <Route path='/search-results' element={<SearchResults />} />
-        <Route path='/develop' element={<Develop />} />
+        <Route path="/" element={<MainLayout />}>
+          <Route index element={<Home />} />
+          <Route path='/search-results' element={<SearchResults />} />
+          <Route path='/about' element={<About />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   </StrictMode>,
