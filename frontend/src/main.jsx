@@ -9,8 +9,7 @@ import Home from './pages/Home'
 import SearchResults from './pages/SearchResults'
 import MainLayout from './pages/Layout';
 import About from './pages/About';
-
-
+import Profile from './pages/Profile'
 
 
 createRoot(document.getElementById('root')).render(
@@ -21,6 +20,7 @@ createRoot(document.getElementById('root')).render(
           <Route index element={<Home />} />
           <Route path='/search-results' element={<SearchResults />} />
           <Route path='/about' element={<About />} />
+          <Route path='/profile' element={<Profile />} />
         </Route>
       </Routes>
     </BrowserRouter>
