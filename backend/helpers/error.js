@@ -1,13 +1,9 @@
 class HttpError extends Error{
     constructor(code, name, message){
-        super(message)
+        super(code, name, message)
         this.code = code
         this.name = name
         this.message = message
-    }
-
-    getErrorCode(){
-        return(this.code)
     }
 
     toJson(){
@@ -31,7 +27,14 @@ class InternalServerError extends HttpError{
     }
 }
 
-export default {
+class UnauthorizedError extends HttpError {
+    constructor(message){
+        super(401, 'Unauthorized', message)
+    }
+}
+
+export {
     BotDetectionError,
-    InternalServerError
+    InternalServerError,
+    UnauthorizedError
 }

@@ -3,11 +3,8 @@ import jwt from 'jsonwebtoken'
 const authenticate = ({ secret }) => {
     return async(req, res, next) => {
         try{
-            console.log("Authenticate.js")
-
             let token = ""
             if(req.headers.authorization){
-                console.log(req.headers.authorization)
                 token = req.headers.authorization
             }
             if(token){
@@ -17,7 +14,7 @@ const authenticate = ({ secret }) => {
             }
         }
         catch(error){
-            console.error(error)
+            console.error("Hata", error)
         }
         next()
     }

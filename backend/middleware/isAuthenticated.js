@@ -1,9 +1,11 @@
+import { UnauthorizedError } from './../helpers/error.js'
+import handleError from './../helpers/handleError.js'
+
 const isAuthenticated = async(req, res, next) => {
     if(req?.user){
-        console.log("authneticated")
         return next()
     }
-    console.log("Not authenticated")
+    return handleError(new UnauthorizedError('Not autheticated'), req, res)
 }
 
 export default isAuthenticated

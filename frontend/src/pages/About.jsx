@@ -6,13 +6,7 @@ function About(){
     async function handleClick() {
         console.log("Tıklandı")
         try{
-            const response = await axios.post("http://localhost:5000/develop",
-                {},
-                {
-                headers:{
-                    authorization: 'Kerem'
-                }
-            })
+            const response = await axios.post("http://localhost:5000/develop")
             console.log(response)
         }
         catch(error){

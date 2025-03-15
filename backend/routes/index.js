@@ -9,7 +9,7 @@ function deneme(req, res){
     res.status(200).json({message:req.headers.authorization})
 }
 
-router.use(isAuthenticated)
+
 router.use("/search", searchRoutes)
 router.use("/develop",deneme)
 
