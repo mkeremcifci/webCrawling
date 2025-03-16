@@ -11,6 +11,7 @@ async function Register(firstName, lastName, email, password){
             email,
             password
         })
+        
         await user.save()
         
     }

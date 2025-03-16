@@ -5,7 +5,7 @@ import axios from 'axios'
 const Login = () => {
     const onFinish = (values) => {
         try{
-            const response = axios.post("http://localhost:5000/register",{
+            const response = axios.post("http://localhost:5000/login",{
                 email:values.email,
                 password:values.password
             })
