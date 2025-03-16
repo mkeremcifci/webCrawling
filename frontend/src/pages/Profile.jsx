@@ -1,4 +1,4 @@
-function profile(){
+function Profile(){
     return(
         <h1>
             Profile
@@ -6,4 +6,4 @@ function profile(){
     )
 }
 
-export default profile
+export default Profile

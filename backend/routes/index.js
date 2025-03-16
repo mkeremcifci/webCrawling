@@ -2,6 +2,7 @@ import express from "express"
 
 import searchRoutes from "./search.js"
 import isAuthenticated from "./../middleware/isAuthenticated.js"
+import register from './register.js'
 
 const router = express.Router()
 
@@ -11,6 +12,7 @@ function deneme(req, res){
 
 
 router.use("/search", searchRoutes)
-router.use("/develop",deneme)
+router.use("/profile",deneme)
+router.use("/register", register)
 
 export default router

@@ -18,7 +18,9 @@ const MyForm = () => {
             navigate("/search-results",{state:{userInput:jobValue,results:response.data.message}})
         }
         catch(error){
-            console.error("Error sending data:", error)
+            if(error.response.status === 403){
+                console.log("Bota düştü")
+            }
         }
     }
 

@@ -33,8 +33,15 @@ class UnauthorizedError extends HttpError {
     }
 }
 
+class BadRequestError extends HttpError {
+    constructor(message){
+        super(400, "BadRequest", message)
+    }
+}
+
 export {
     BotDetectionError,
     InternalServerError,
-    UnauthorizedError
+    UnauthorizedError,
+    BadRequestError
 }

@@ -4,11 +4,14 @@ import "dotenv/config"
 
 import routes from "./routes/index.js"
 import authenticate from "./middleware/authenticate.js"
+import mongoose from "mongoose"
 
 
 
 const PORT = process.env.PORT || 5000
 const app = express()
+
+mongoose.connect(process.env.MONGO_URI)
 
 app.use(cros())
 app.use(express.json());

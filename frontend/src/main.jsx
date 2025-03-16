@@ -10,6 +10,9 @@ import SearchResults from './pages/SearchResults'
 import MainLayout from './pages/Layout';
 import About from './pages/About';
 import Profile from './pages/Profile'
+import Login from './pages/Login'
+import Register from './pages/Register';
+
 
 
 createRoot(document.getElementById('root')).render(
@@ -21,6 +24,8 @@ createRoot(document.getElementById('root')).render(
           <Route path='/search-results' element={<SearchResults />} />
           <Route path='/about' element={<About />} />
           <Route path='/profile' element={<Profile />} />
+          <Route path='/login' element={<Login />} />
+          <Route path='/register' element={<Register />} />
         </Route>
       </Routes>
     </BrowserRouter>
